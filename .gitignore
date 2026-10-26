@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+.ecmwfapirc
+.cdsapirc
+_deps/
+_qa/
