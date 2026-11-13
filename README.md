@@ -1,36 +1,21 @@
-# Climate information and temporal reconciliation of subseasonal rainfall forecasts
+# Rainfall forecast research data and code
 
-Musong Yang and Ce Yang, Beijing Institute of Technology.
+This repository provides analysis plans, derived verification scores and numerical analysis code. Current manuscripts and document-generation scripts are kept locally.
 
-This repository contains the analysis source for the study in eight Australian geographical domains. The study evaluates where climate predictors enter weekly and aggregate rainfall forecasts, against raw forecasts and simple bottom-up baselines.
+## Current public data
 
-## Public research snapshot
+Use [data/transfer_2021_2024_20261102](data/transfer_2021_2024_20261102) for the four-year transfer assessment, observation-snapshot checks, independent decoder audit and expanded nested-selection summaries.
 
-Download the versioned archive and SHA-256 checksum from [Releases](https://github.com/yms2000111/jshess-rainfall-reconciliation/releases). The 26 October 2026 snapshot contains 700 files: Python source, processed regional inputs, score tables, source metadata, mathematical checks, the V5 manuscript, supplementary materials and equation explanations. Extract the ZIP into an empty directory to retain the analysis paths.
+Download `derived_scores.json`, `additional_checks.json` and `verify_public_summaries.py` to one directory, then run:
 
-The Git repository exposes the source code; the ZIP supplies its data and document dependencies. Large fitting caches, global source archives and installed environments are omitted. Refitting those caches requires the supplied source retrieval and fitting scripts and may take substantial time. No independent clean-environment reproduction is claimed yet.
+```
+python verify_public_summaries.py .
+```
 
-## Scope and validation
+The check uses only the Python standard library and reconstructs pooled effects, exact annual tests, Holm adjustment, domain means and selection summaries from public derived records. Raw-field decoding and model fitting are separate stages.
 
-- ECMWF: eight domains, historical year-block validation and information-placement controls.
-- ACCESS-S2: eight domains with a different start-date and ensemble-member schedule.
-- 2020: a separate archived-period test with models frozen before scoring; a single year cannot quantify interannual uncertainty.
-- 99 year-block permutations, mathematical audits and physical-background diagnostics are retained.
+## Provenance and access
 
-The original locally dated [2020 test plan](revision/review_v5/operational_test_plan_20261025.md) is preserved. This repository was created on **26 October 2026**, after the analysis. Its timestamp is a public deposit date, not proof of prospective preregistration.
+Dated plans are in [analysis_plans](analysis_plans). The 2023–2024 extension was specified after inspecting 2021–2022 and before scoring the additional years. Provider licences govern original meteorological data. Obtain restricted fields from their providers.
 
-## Running the analyses
-
-Use Python with `requirements.txt`, and run commands from the extracted project root. `code/common.py` resolves paths relative to that root.
-
-The baseline and nested validation implementations are in `revision_cv.py`, `extension_cv.py`, and `review_controls.py`. Eight-domain extensions use `coverage_extension.py`; V5 ACCESS processing and validation use `v5_access_download.py` and `v5_access_analysis.py`. Information-placement and permutation experiments use `v5_new_experiments.py`, followed by `v5_placement_inference.py`. The archived-period check uses `v5_operational_download.py`, `v5_operational_analysis.py` and `v5_operational_audit.py`.
-
-Run `python code/audit_v5_mathematics.py` after its archived prediction dependencies have been regenerated. Word rendering additionally requires Microsoft Word and its MML2OMML transform; numerical analyses do not require Word. Historical document builders are retained as provenance, and are not interchangeable with the V5 builder.
-
-## Interpretation and version status
-
-This is a research snapshot during manuscript revision, not a final journal publication. Later editorial and experimental changes will be recorded separately. Cross-validation gains do not establish universal operational improvement. In particular, comparisons against BU-clim should be read alongside BU-rain, raw forecasts and H0.
-
-## Rights and attribution
-
-Source data retain their provider licences and attribution requirements. The ACCESS-S2 licence is retained in the archive at `revision/review_v4/access_s2/license.txt`. Original code and manuscript rights remain with the authors; this initial deposit does not assign an additional blanket reuse licence. No DOI or Zenodo deposit is claimed.
+The current branch excludes the old manuscript file and document-generation scripts. Historical commits and legacy Release archives may still contain early document snapshots. Use the dated data directory above for current results. This repository is a research archive, not a journal publication or a DOI registration.
